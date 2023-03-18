@@ -53,31 +53,29 @@ class Matches extends Component
 
     public function render()
     {
-        $results = MatchesModel::query()->with('userhasmatches');
-        if ($this->userId) {
-            $results->whereHas('userhasmatches',function ($query){
-                $query->where('user_id',$this->userId);
-            });
-        }
-
         $matches = [];
-        foreach($results->get()->toArray() as $result) {
-            $votedTeamNr = '';
-            foreach ($result['userhasmatches'] as $userhasmatch) {
-                if ($userhasmatch['user_id'] == auth()->user()->id){
-                    $votedTeamNr = $userhasmatch['voted_team_nr'];
-                    break;
+        if (!$this->hideMatches) {
+            $results = MatchesModel::query()->with('userhasmatches');
+
+            foreach($results->get()->toArray() as $result) {
+                $votedTeamNr = '';
+                foreach ($result['userhasmatches'] as $userhasmatch) {
+                    if ($userhasmatch['user_id'] == auth()->user()->id){
+                        $votedTeamNr = $userhasmatch['voted_team_nr'];
+                        break;
+                    }
                 }
+                $matches[] = [
+                    'id' => $result['id'],
+                    'team1' => $result['team1'],
+                    'team2' => $result['team2'],
+                    'isActive' => $result['isActive'],
+                    'voted_team_nr' => $votedTeamNr
+                ];
             }
-            $matches[] = [
-                'id' => $result['id'],
-                'team1' => $result['team1'],
-                'team2' => $result['team2'],
-                'isActive' => $result['isActive'],
-                'voted_team_nr' => $votedTeamNr
-            ];
         }
         return view('livewire/matches/match',compact('matches'));
+
     }
 
     /**

@@ -18,8 +18,6 @@
 
         <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.css" rel="stylesheet" />
 
-        <script src="{{ Vite::asset('resources/plugins/jquery/jquery.js') }}"></script>
-        <script src="{{ Vite::asset('resources/plugins/sweetalert/sweetalert.js') }}"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.6.4/flowbite.min.js"></script>
 
         @vite(['resources/sass/app.scss', 'resources/js/app.js'])
