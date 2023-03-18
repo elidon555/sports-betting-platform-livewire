@@ -15,6 +15,7 @@ class Matches extends Component
     public $team1;
     public $team2;
     public $isActive;
+    public $matchId;
     public $hideMatches;
 
     protected $listeners = [
