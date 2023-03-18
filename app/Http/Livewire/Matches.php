@@ -126,7 +126,6 @@ class Matches extends Component
             $this->updateMatch = false;
             $this->hideMatches = false;
         } catch (\Exception $ex) {
-            dd($ex);
             session()->flash('error','Something goes wrong!!');
         }
     }
